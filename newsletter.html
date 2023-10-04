@@ -850,7 +850,7 @@
                                                                                     <h1>DofE Newsletter Week {{week_no}}
                                                                                     </h1>
                                                                                     <br />
-                                                                                    {{ introduction }}
+                                                                                    {{ introduction | safe }}
                                                                                 </td>
                                                                             </tr>
                                                                         </tbody>
@@ -920,8 +920,10 @@
                                                                                         <div id="bannerL">
                                                                                             <div id="lipsum">
                                                                                                 <p>{{ event.description
+                                                                                                    | safe
                                                                                                     }}<br />
-                                                                                                    {{event.tldr}}</p>
+                                                                                                    {{event.tldr | safe
+                                                                                                    }}</p>
                                                                                             </div>
                                                                                         </div>
                                                                                     </div>
@@ -986,7 +988,8 @@
                                                                             <tr>
                                                                                 <td class="mcnTextContent"
                                                                                     style="padding-top:0; padding-right:18px; padding-bottom:9px; padding-left:18px;"
-                                                                                    valign="top">{{ conclusion }}</td>
+                                                                                    valign="top">{{ conclusion | safe }}
+                                                                                </td>
                                                                             </tr>
                                                                         </tbody>
                                                                     </table>
