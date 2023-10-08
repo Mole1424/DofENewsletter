@@ -30,18 +30,31 @@ with app.app_context():
         # Use re.sub to find and replace URLs with anchor tags
         return re.sub(url_pattern, replace_url, input_text)
 
+    # allows enter to be pressed and still continue typing
+    def enter(input_text):
+        # initialise variables
+        to_return = False
+        return_text = ""
+        while not to_return:
+            return_text += input(input_text) + "<br />"
+            # if enter, then i, return
+            if input("You have pressed enter, [i]nput or [c]ontinue?") != "c":
+                to_return = True
+        # remove last 6 characters (br tag)
+        return return_text[:-6]
+
     week_no = int(input("Enter the week number: "))
-    introduction = add_anchor(input("Enter the introduction: "))
+    introduction = add_anchor(enter("Enter the introduction: "))
     event_no = int(input("Enter the number of events: "))
     events = []  # list of events
     # iterate over events and add to list
     for i in range(event_no):
         title = input("Enter the title of the event: ")
-        description = add_anchor(input("Enter the description of the event: "))
+        description = add_anchor(enter("Enter the description of the event: "))
         tldr = input("Enter the TLDR of the event: ")
         event = Event(title, description, tldr)
         events.append(event)
-    conclusion = add_anchor(input("Enter the conclusion: "))
+    conclusion = add_anchor(enter("Enter the conclusion: "))
 
     # render html template with flask
     newsletter = render_template(
