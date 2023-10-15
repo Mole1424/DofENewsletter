@@ -11,6 +11,8 @@ Because the SU generator is a pain in the ass
 5. At [https://github.com/Mole1424/DofENewsletter](https://github.com/Mole1424/DofENewsletter) click on the green `Code` button and download in ZIP format
 6. Unzip the file (`Right click -> extact all` on windows `double click` on mac)
 
+(ps if you have linux you should know how to do this)
+
 ## Run
 1. Navigate to the `DofENewsletter` folder in either file explorer (windows) or finder (mac)
 2. `right click -> open with terminal`
@@ -25,3 +27,7 @@ Because the SU generator is a pain in the ass
 ## Edits
 
 This was made in about half an hour so there are probably some flaws in it. The template is cloned from mailchimp and slightly edited by me to include icons and jinja scripting so sorry if its a bit cursed. To next secretary need to change name on line 1049 in `newsletter.html` from my name.
+
+## If everything breaks
+
+Contact me
