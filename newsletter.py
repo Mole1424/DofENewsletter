@@ -49,9 +49,9 @@ with app.app_context():
     events = []  # list of events
     # iterate over events and add to list
     for i in range(event_no):
-        title = input("Enter the title of the event: ")
+        title = input(f"Enter the title of the event number {i+1}: ")
         description = add_anchor(enter("Enter the description of the event: "))
-        tldr = input("Enter the TLDR of the event: ")
+        tldr = input("Enter the tldr of the event: ")
         event = Event(title, description, tldr)
         events.append(event)
     conclusion = add_anchor(enter("Enter the conclusion: "))
