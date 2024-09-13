@@ -1,29 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
 <head>
     <title>DofE Emails</title>
-    <link rel="stylesheet" type="text/css" href="static/main.css">
-    <script src="static/main.js"></script>
+    <link rel="stylesheet" type="text/css" href="/static/main.css">
+    <script src="/static/main.js"></script>
+    <link rel="icon" type="image/png" sizes="32x32" href="/static/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/static/favicon-16x16.png">
 </head>
 <body>
     <div class="header">
         <div class="header-item">
-            <h1>DofE Email Generator</h1>
-            <h2>Becuase the SU website is a bit bad</h2>
+            <div class="logo">
+                <img src="/static/logo.png" alt="DofE Logo">
+            </div>
         </div>
         <div class="header-item">
-            <img src="static/logo.png" alt="DofE Logo">
+            <div class="header-text">
+                <h1>DofE Email Generator</h1>
+                <h2>Becuase the SU website is a pain in the ass</h2>
+                <p><a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ">How to use</a></p>
+            </div>
         </div>
     </div>
     <div class="emails">
         <div class="email" id="markdown">
-
+            <textarea class="introduction" id="introduction" name="introduction" placeholder="Introduction"></textarea>
+            <div class="event">
+                <input type="text" class="event-name" id="event1Name" name="event1Name" placeholder="Event 1 Name">
+                <button class="event-close" id="event1Close">x</button>
+                <textarea class="event-description" id="event1Description" placeholder="Event 1 Description"></textarea>
+                <input type="text" class="event-tldr" id="event1tldr" name="event1tldr" placeholder="Event 1 tldr">
+            </div>
+            <div class="add-event-container">
+                <button class="button" id="addEvent">+</button>
+            </div>
+            <textarea class="conclusion" id="conclusion" name="conclusion" placeholder="Conclusion"></textarea>
+            <div class="links">
+                <div class="link">
+                    <img src="https://png.pngtree.com/png-vector/20221018/ourmid/pngtree-whatsapp-mobile-software-icon-png-image_6315991.png" alt="WhatsApp">
+                    <input type="text" id="whatsapp" name="whatsapp" placeholder="WhatsApp Link">
+                </div>
+                <button class="button" id="addLink">+</button>
+            </div>
         </div>
         <div class="email" id="html">
 
         </div>
-        <button>Generate email</button>
+    </div>
+    <div class="generate-container">
+        <button class="button">Generate email</button>
     </div>
     <div class="footer">
-        <p>Made by Joel Coulon</p>
+        <p>Made by <a href="https://joelcoulon.com/">Joel Coulon</a></p>
         <p>View my source code at <a href="https://github.com/Mole1424/DofENewsletter">https://github.com/Mole1424/DofENewsletter</a></p>
     </div>
 </body>
+</html>
