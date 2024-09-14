@@ -11,7 +11,7 @@
     <div class="header">
         <div class="header-item">
             <div class="logo">
-                <img src="/static/logo.png" alt="DofE Logo">
+                <a href="https://warwick.ac.uk/sunion/dofesoc/"><img src="/static/logo.png" alt="DofE Logo"></a>
             </div>
         </div>
         <div class="header-item">
@@ -26,36 +26,40 @@
         <div class="email" id="markdown">
             <input type="text" id="weekNumber" name="weekNumber" placeholder="Week Number">
             <textarea class="introduction" id="introduction" name="introduction" placeholder="Introduction"></textarea>
-            <div class="event">
-                <input type="text" class="event-name" id="event1Name" name="event1Name" placeholder="Event 1 Name">
-                <button class="event-close" id="event1Close">x</button>
-                <textarea class="event-description" id="event1Description" placeholder="Event 1 Description"></textarea>
-                <input type="text" class="event-tldr" id="event1tldr" name="event1tldr" placeholder="Event 1 tldr">
-            </div>
+            {% for i in range(1, num_events+1) %}
+                <div class="event">
+                    <input type="text" class="event-name" id="event{{i}}Name" name="event{{i}}Name" placeholder="Event {{i}} Name">
+                    {% if i != 1 %}
+                        <button class="event-close" id="event{{i}}Close" onclick="closeCustomEvent({{i}});">x</button>
+                    {% endif %}
+                    <textarea class="event-description" id="event{{i}}Description" placeholder="Event {{i}} Description"></textarea>
+                    <input type="text" class="event-tldr" id="event{{i}}tldr" name="event{{i}}tldr" placeholder="Event {{i}} tldr">
+                </div>
+            {% endfor %}
             <div class="add-event-container">
-                <button class="button" id="addEvent">+</button>
+                <button class="button" id="addEvent" onclick="createCustomEvent()">+</button>
             </div>
             <textarea class="conclusion" id="conclusion" name="conclusion" placeholder="Conclusion"></textarea>
             <div class="links">
                 <div class="link">
                     <img src="https://png.pngtree.com/png-vector/20221018/ourmid/pngtree-whatsapp-mobile-software-icon-png-image_6315991.png" alt="WhatsApp">
-                    <input type="text" id="whatsapp" name="whatsapp" placeholder="WhatsApp Link" {%if links[0] != ''%}value="{{links[0]}}"{% endif %}>
+                    <input type="text" id="whatsapp" name="whatsapp" placeholder="WhatsApp Link">
                 </div>
                 <div class="link">
                     <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a5/Instagram_icon.png/2048px-Instagram_icon.png" alt="Instagram">
-                    <input type="text" id="instagram" name="instagram" placeholder="Instagram Link" {%if links[1] != ''%}value="{{links[1]}}"{% endif %}>
+                    <input type="text" id="instagram" name="instagram" placeholder="Instagram Link">
                 </div>
                 <div class="link">
                     <img src="https://www.pngmart.com/files/15/Email-Symbol-PNG-Transparent-Picture.png" alt="Email">
-                    <input type="text" id="email" name="email" placeholder="Email Address" {%if links[2] != ''%}value="{{links[2]}}"{% endif %}>
+                    <input type="text" id="email" name="email" placeholder="Email Address">
                 </div>
                 <div class="link">
                     <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/51/Facebook_f_logo_%282019%29.svg/2048px-Facebook_f_logo_%282019%29.svg.png" alt="Facebook">
-                    <input type="text" id="facebook" name="facebook" placeholder="Facebook Link" {%if links[3] != ''%}value="{{links[3]}}"{% endif %}>
+                    <input type="text" id="facebook" name="facebook" placeholder="Facebook Link">
                 </div>
                 <div class="link">
                     <img src="https://cdn-icons-png.flaticon.com/512/3214/3214679.png" alt="Website URL">
-                    <input type="text" id="url" name="url" placeholder="Website URL" {%if links[4] != ''%}value="{{links[4]}}"{% endif %}>
+                    <input type="text" id="url" name="url" placeholder="Website URL">
                 </div>
             </div>
         </div>
@@ -64,11 +68,12 @@
         </div>
     </div>
     <div class="generate-container">
-        <button class="button">Generate email</button>
+        <button class="button generate">Generate email</button>
     </div>
     <div class="footer">
         <p>Made by <a href="https://joelcoulon.com/">Joel Coulon</a></p>
         <p>View my source code at <a href="https://github.com/Mole1424/DofENewsletter">https://github.com/Mole1424/DofENewsletter</a></p>
+        <p>I use cookies to save your inputs for 31 days</p>
     </div>
 </body>
 </html>

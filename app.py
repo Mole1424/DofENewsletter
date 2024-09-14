@@ -5,9 +5,7 @@ app = Flask(__name__)
 
 @app.route("/")
 def index():
-    links = request.cookies.get("links")
-    if links is not None:
-        links = links.split(",")
-    else:
-        links = [""] * 5
-    return render_template("main.html", links=links)
+    num_events = request.cookies.get("numEvents")
+    if num_events is None:
+        num_events = 1
+    return render_template("main.html", num_events=int(num_events))

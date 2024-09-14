@@ -83,7 +83,7 @@ body {
 
 .event {
     width: 100%;
-    min-height: 17vh;
+    height: 20vh;
 }
 
 .event>* {
@@ -94,7 +94,7 @@ body {
 }
 
 .event-name {
-    min-height: 10%;
+    height: 10%;
     width: 92%;
     margin-top: 2%;
     margin-right: 0;
@@ -116,7 +116,7 @@ body {
 
 .event-description {
     width: 95%;
-    min-height: 23%;
+    height: 40%;
     resize: none;
 }
 
@@ -133,7 +133,7 @@ body {
 }
 
 .conclusion {
-    min-height: 5vh;
+    height: 5vh;
 }
 
 .links {
@@ -148,7 +148,7 @@ body {
     align-items: center;
     width: 95%;
     margin: 0 2.5%;
-    min-height: 5vh;
+    height: 5vh;
     border: 1px solid var(--accent);
     border-radius: 5px;
     margin-bottom: 1vh;
@@ -186,6 +186,11 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.generate {
+    height: 65%;
+    font-size: larger;
 }
 
 .footer {
