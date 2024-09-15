@@ -1,8 +1,8 @@
 // Set a cookie
-function setCookie(name, value) {
+function setCookie(name, value, days) {
     let expires = "";
     const date = new Date();
-    date.setTime(date.getTime() + (31 * 24 * 60 * 60 * 1000)); // 31 days
+    date.setTime(date.getTime() + ((days || 31) * 24 * 60 * 60 * 1000)); // default to 31 days
     expires = "; expires=" + date.toUTCString();
     document.cookie = name + "=" + (value || "") + expires + "; path=/";
 }
@@ -12,6 +12,7 @@ function getCookie(name) {
     const nameEQ = name + "=";
     const ca = document.cookie.split(';');
     for (let i = 0; i < ca.length; i++) {
+        // loop each cookie to find the one with the name
         let c = ca[i];
         while (c.charAt(0) === ' ') c = c.substring(1, c.length);
         if (c.indexOf(nameEQ) === 0) return c.substring(nameEQ.length, c.length);
@@ -23,7 +24,7 @@ function getCookie(name) {
 function updateCookieOnInput(inputElement) {
     const inputId = inputElement.id;
     inputElement.addEventListener('input', function () {
-        setCookie(inputId, inputElement.value); // Save cookie
+        setCookie(inputId, inputElement.value);
     });
 }
 
@@ -38,7 +39,7 @@ function initialiseInputsFromCookies() {
     });
 }
 
-// Function to initialise event listeners on all input and textarea fields
+// Initialise event listeners on all input and textarea fields
 function initialiseEventListeners() {
     const inputs = document.querySelectorAll('input, textarea');
     inputs.forEach(input => {
@@ -54,18 +55,12 @@ document.addEventListener('DOMContentLoaded', function () {
 
 // Create an event
 function createCustomEvent() {
-    numEvents = getCookie('numEvents');
-    if (!numEvents) {
-        numEvents = 2;
-    }
-    else {
-        numEvents = parseInt(numEvents) + 1;
-    }
+    numEvents = parseInt(getCookie('numEvents') || 1) + 1;
     setCookie('numEvents', numEvents);
     const eventHtml = `
-        <div class="event">
+        <div class="event" id="event${numEvents}">
             <input type="text" class="event-name" id="event${numEvents}Name" name="event${numEvents}Name" placeholder="Event ${numEvents} Name">
-            <button class="event-close" id="event${numEvents}Close" onclick="xEvent(${numEvents});">x</button>
+            <button class="event-close" id="event${numEvents}Close" onclick="closeCustomEvent(${numEvents});">x</button>
             <textarea class="event-description" id="event${numEvents}Description" placeholder="Event ${numEvents} Description"></textarea>
             <input type="text" class="event-tldr" id="event${numEvents}tldr" name="event${numEvents}tldr" placeholder="Event ${numEvents} tldr">
         </div>
@@ -84,4 +79,32 @@ function createCustomEvent() {
 
 // Cancel an event
 function closeCustomEvent(eventId) {
+    // remove event from dom
+    const event = document.getElementById(`event${eventId}`);
+    event.remove();
+    setCookie('numEvents', parseInt(getCookie('numEvents')) - 1);
+    // update all events after this one
+    for (let i = eventId + 1; i <= parseInt(getCookie('numEvents')) + 1; i++) {
+        console.log('updating event', i);
+        const event = document.getElementById(`event${i}`);
+        event.id = `event${i - 1}`;
+        event.querySelector('.event-name').id = `event${i - 1}Name`;
+        event.querySelector('.event-name').name = `event${i - 1}Name`;
+        event.querySelector('.event-name').placeholder = `Event ${i - 1} Name`;
+        event.querySelector('.event-close').id = `event${i - 1}Close`;
+        event.querySelector('.event-close').onclick = function () { closeCustomEvent(i - 1); };
+        event.querySelector('.event-description').id = `event${i - 1}Description`;
+        event.querySelector('.event-description').placeholder = `Event ${i - 1} Description`;
+        event.querySelector('.event-tldr').id = `event${i - 1}tldr`;
+        event.querySelector('.event-tldr').name = `event${i - 1}tldr`;
+        event.querySelector('.event-tldr').placeholder = `Event ${i - 1} tldr`;
+
+        setCookie(`event${i - 1}Name`, getCookie(`event${i}Name`));
+        setCookie(`event${i - 1}Description`, getCookie(`event${i}Description`));
+        setCookie(`event${i - 1}tldr`, getCookie(`event${i}tldr`));
+    }
+    // remove non-existent last event cookies
+    setCookie(`event${parseInt(getCookie('numEvents')) + 1}Name`, null, -1);
+    setCookie(`event${parseInt(getCookie('numEvents')) + 1}Description`, null, -1);
+    setCookie(`event${parseInt(getCookie('numEvents')) + 1}tldr`, null, -1);
 }

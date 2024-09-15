@@ -27,7 +27,7 @@
             <input type="text" id="weekNumber" name="weekNumber" placeholder="Week Number">
             <textarea class="introduction" id="introduction" name="introduction" placeholder="Introduction"></textarea>
             {% for i in range(1, num_events+1) %}
-                <div class="event">
+                <div class="event" id="event{{i}}">
                     <input type="text" class="event-name" id="event{{i}}Name" name="event{{i}}Name" placeholder="Event {{i}} Name">
                     {% if i != 1 %}
                         <button class="event-close" id="event{{i}}Close" onclick="closeCustomEvent({{i}});">x</button>
