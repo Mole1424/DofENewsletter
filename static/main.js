@@ -1,6 +1,9 @@
 // Set a cookie
 function setCookie(name, value, days) {
     let expires = "";
+    if (name.endsWith('Link')) {
+        days = 365; // default to 1 year for links
+    }
     const date = new Date();
     date.setTime(date.getTime() + ((days || 31) * 24 * 60 * 60 * 1000)); // default to 31 days
     expires = "; expires=" + date.toUTCString();
