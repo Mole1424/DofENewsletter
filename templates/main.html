@@ -40,6 +40,7 @@
                 <button class="button" id="addEvent" onclick="createCustomEvent()">+</button>
             </div>
             <textarea class="conclusion" id="conclusion" name="conclusion" placeholder="Conclusion"></textarea>
+            <input type="text" id="name" name="name" placeholder="Name">
             <div class="links">
                 <div class="link">
                     <img src="https://png.pngtree.com/png-vector/20221018/ourmid/pngtree-whatsapp-mobile-software-icon-png-image_6315991.png" alt="WhatsApp">
@@ -63,12 +64,12 @@
                 </div>
             </div>
         </div>
-        <div class="email" id="html">
+        <div class="email" id="email">
 
         </div>
     </div>
     <div class="generate-container">
-        <button class="button generate">Generate email</button>
+        <button class="button generate" onclick="generateEmail();">Generate email</button>
     </div>
     <div class="footer">
         <p>Made by <a href="https://joelcoulon.com/">Joel Coulon</a></p>

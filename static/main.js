@@ -111,3 +111,44 @@ function closeCustomEvent(eventId) {
     setCookie(`event${parseInt(getCookie('numEvents')) + 1}Description`, null, -1);
     setCookie(`event${parseInt(getCookie('numEvents')) + 1}tldr`, null, -1);
 }
+
+// Generate email
+function generateEmail() {
+    // start new request
+    var xmlhttp = new XMLHttpRequest();
+    xmlhttp.open("POST", "/createEmail", true);
+    xmlhttp.setRequestHeader("Content-Type", "application/json");
+    // create json object
+    var json = {
+        "weekNo": document.getElementById("weekNumber").value,
+        "introduction": document.getElementById("introduction").value,
+        "events": [],
+        "conclusion": document.getElementById("conclusion").value,
+        "name": document.getElementById("name").value,
+        "whatsapp": document.getElementById("whatsappLink").value,
+        "instagram": document.getElementById("instagramLink").value,
+        "email": document.getElementById("emailLink").value,
+        "facebook": document.getElementById("facebookLink").value,
+        "website": document.getElementById("urlLink").value
+    };
+    // append events
+    var events = document.getElementsByClassName("event");
+    for (var i = 0; i < events.length; i++) {
+        var event = events[i];
+        json.events.push({
+            "title": event.querySelector(".event-name").value,
+            "description": event.querySelector(".event-description").value,
+            "tldr": event.querySelector(".event-tldr").value
+        });
+    }
+    // send request
+    xmlhttp.send(JSON.stringify(json));
+    // recieve response and update dom + clipboard
+    xmlhttp.onreadystatechange = function () {
+        if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+            var email = xmlhttp.responseText;
+            document.getElementById("email").innerHTML = email;
+            navigator.clipboard.writeText(email);
+        }
+    };
+}
