@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>DofE Emails</title>
+    <link rel="stylesheet" type="text/css" href="/static/main.css">
+    <script src="/static/main.js"></script>
+    <link rel="icon" type="image/png" sizes="32x32" href="/static/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/static/favicon-16x16.png">
+</head>
+<body>
+    <div class="header">
+        <div class="header-item">
+            <div class="logo">
+                <a href="https://warwick.ac.uk/sunion/dofesoc/"><img src="/static/logo.png" alt="DofE Logo"></a>
+            </div>
+        </div>
+        <div class="header-item">
+            <div class="header-text">
+                <h1>DofE Email Generator</h1>
+                <h2>Becuase the SU website is a pain in the ass</h2>
+                <p><a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ">How to use</a></p>
+            </div>
+        </div>
+    </div>
+    <div class="emails">
+        <div class="email" id="markdown">
+            <input type="text" id="weekNumber" name="weekNumber" placeholder="Week Number">
+            <textarea class="introduction" id="introduction" name="introduction" placeholder="Introduction"></textarea>
+            {% for i in range(1, num_events+1) %}
+                <div class="event" id="event{{i}}">
+                    <input type="text" class="event-name" id="event{{i}}Name" name="event{{i}}Name" placeholder="Event {{i}} Name">
+                    {% if i != 1 %}
+                        <button class="event-close" id="event{{i}}Close" onclick="closeCustomEvent({{i}});">x</button>
+                    {% endif %}
+                    <textarea class="event-description" id="event{{i}}Description" placeholder="Event {{i}} Description"></textarea>
+                    <input type="text" class="event-tldr" id="event{{i}}tldr" name="event{{i}}tldr" placeholder="Event {{i}} tldr">
+                </div>
+            {% endfor %}
+            <div class="add-event-container">
+                <button class="button" id="addEvent" onclick="createCustomEvent()">+</button>
+            </div>
+            <textarea class="conclusion" id="conclusion" name="conclusion" placeholder="Conclusion"></textarea>
+            <input type="text" id="name" name="name" placeholder="Name">
+            <div class="links">
+                <div class="link">
+                    <img src="https://png.pngtree.com/png-vector/20221018/ourmid/pngtree-whatsapp-mobile-software-icon-png-image_6315991.png" alt="WhatsApp">
+                    <input type="text" id="whatsappLink" name="whatsapp" placeholder="WhatsApp Link">
+                </div>
+                <div class="link">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a5/Instagram_icon.png/2048px-Instagram_icon.png" alt="Instagram">
+                    <input type="text" id="instagramLink" name="instagram" placeholder="Instagram Link">
+                </div>
+                <div class="link">
+                    <img src="https://www.pngmart.com/files/15/Email-Symbol-PNG-Transparent-Picture.png" alt="Email">
+                    <input type="text" id="emailLink" name="email" placeholder="Email Address">
+                </div>
+                <div class="link">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/51/Facebook_f_logo_%282019%29.svg/2048px-Facebook_f_logo_%282019%29.svg.png" alt="Facebook">
+                    <input type="text" id="facebookLink" name="facebook" placeholder="Facebook Link">
+                </div>
+                <div class="link">
+                    <img src="https://cdn-icons-png.flaticon.com/512/3214/3214679.png" alt="Website URL">
+                    <input type="text" id="urlLink" name="url" placeholder="Website URL">
+                </div>
+            </div>
+        </div>
+        <div class="email" id="email">
+
+        </div>
+    </div>
+    <div class="copy-container">
+        <button class="button copy" onclick="copyEmail();">Copy email to clipboard</button>
+    </div>
+    <div class="footer">
+        <p>Made by <a href="https://joelcoulon.com/">Joel Coulon</a></p>
+        <p>View my source code at <a href="https://github.com/Mole1424/DofENewsletter">https://github.com/Mole1424/DofENewsletter</a></p>
+        <p>I use cookies to save your inputs for up to a <abbr title="URLs and name will be maintained for a year, everything else for a month, timer will reset if you update a field">year</abbr></p>
+    </div>
+</body>
+</html>
