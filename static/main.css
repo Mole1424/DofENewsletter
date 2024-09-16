@@ -38,6 +38,7 @@ body {
 
 .header-text h1,
 .header-text p {
+    text-align: left;
     margin: 2px 0;
 }
 
@@ -74,6 +75,11 @@ body {
     width: 100%;
     border: 1px solid var(--accent);
     border-radius: 5px;
+}
+
+#email>* {
+    border: none;
+    border-radius: 0;
 }
 
 .introduction {
@@ -180,7 +186,7 @@ body {
     transform: scale(1.1);
 }
 
-.generate-container {
+.copy-container {
     width: 100vw;
     height: 5vh;
     display: flex;
@@ -188,9 +194,10 @@ body {
     align-items: center;
 }
 
-.generate {
+.copy {
     height: 65%;
     font-size: larger;
+    width: 15vw;
 }
 
 .footer {
@@ -200,4 +207,9 @@ body {
     justify-content: space-evenly;
     align-items: center;
     margin: 1vh 0;
+}
+
+.footer p {
+    flex: 1 1 0;
+    text-align: center;
 }

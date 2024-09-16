@@ -1,8 +1,8 @@
 // Set a cookie
 function setCookie(name, value, days) {
     let expires = "";
-    if (name.endsWith('Link')) {
-        days = 365; // default to 1 year for links
+    if (name.endsWith('Link') || name === 'name') {
+        days = 365; // default to 1 year for links and name
     }
     const date = new Date();
     date.setTime(date.getTime() + ((days || 31) * 24 * 60 * 60 * 1000)); // default to 31 days
@@ -23,11 +23,12 @@ function getCookie(name) {
     return null;
 }
 
-// Update cookie when input field changes
-function updateCookieOnInput(inputElement) {
+// Update cookie and regenerate email when input field changes
+function addListener(inputElement) {
     const inputId = inputElement.id;
     inputElement.addEventListener('input', function () {
         setCookie(inputId, inputElement.value);
+        generateEmail();
     });
 }
 
@@ -46,7 +47,7 @@ function initialiseInputsFromCookies() {
 function initialiseEventListeners() {
     const inputs = document.querySelectorAll('input, textarea');
     inputs.forEach(input => {
-        updateCookieOnInput(input);
+        addListener(input);
     });
 }
 
@@ -54,6 +55,7 @@ function initialiseEventListeners() {
 document.addEventListener('DOMContentLoaded', function () {
     initialiseInputsFromCookies();
     initialiseEventListeners();
+    generateEmail();
 });
 
 // Create an event
@@ -75,9 +77,11 @@ function createCustomEvent() {
     // set listeners
     const newLastEvents = document.querySelectorAll('.event');
     const newEvent = newLastEvents[newLastEvents.length - 1];
-    updateCookieOnInput(newEvent.querySelector('.event-name'));
-    updateCookieOnInput(newEvent.querySelector('.event-description'));
-    updateCookieOnInput(newEvent.querySelector('.event-tldr'));
+    addListener(newEvent.querySelector('.event-name'));
+    addListener(newEvent.querySelector('.event-description'));
+    addListener(newEvent.querySelector('.event-tldr'));
+    // generate email
+    generateEmail();
 }
 
 // Cancel an event
@@ -110,6 +114,8 @@ function closeCustomEvent(eventId) {
     setCookie(`event${parseInt(getCookie('numEvents')) + 1}Name`, null, -1);
     setCookie(`event${parseInt(getCookie('numEvents')) + 1}Description`, null, -1);
     setCookie(`event${parseInt(getCookie('numEvents')) + 1}tldr`, null, -1);
+    // regenerate email
+    generateEmail();
 }
 
 // Generate email
@@ -148,7 +154,12 @@ function generateEmail() {
         if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
             var email = xmlhttp.responseText;
             document.getElementById("email").innerHTML = email;
-            navigator.clipboard.writeText(email);
         }
     };
+}
+
+// Copy email to clipboard
+function copyEmail() {
+    var email = document.getElementById("email").innerHTML;
+    navigator.clipboard.writeText(email);
 }
