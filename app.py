@@ -16,6 +16,39 @@ def index():
     return render_template("main.html", num_events=int(num_events))
 
 
+@app.route("/createEmail", methods=["POST"])
+def create_email():
+    json = request.get_json()
+    week_no = sanitize(json["weekNo"])
+    introduction = sanitize(json["introduction"])
+    events = json["events"]
+    # apply markdown to the escaped description
+    for event in events:
+        event["title"] = sanitize(event["title"])
+        event["description"] = sanitize(event["description"])
+        event["tldr"] = sanitize(event["tldr"])
+    conclusion = sanitize(json["conclusion"])
+    name = sanitize(json["name"])
+    whatsapp = sanitize(json["whatsapp"])
+    instagram = sanitize(json["instagram"])
+    email = sanitize(json["email"])
+    facebook = sanitize(json["facebook"])
+    website = sanitize(json["website"])
+    return render_template(
+        "newsletter.html",
+        week_no=week_no,
+        introduction=introduction,
+        events=events,
+        conclusion=conclusion,
+        name=name,
+        whatsapp=whatsapp,
+        instagram=instagram,
+        email=email,
+        facebook=facebook,
+        website=website,
+    )
+
+
 # shamelessly stolen from docs (https://python-markdown.github.io/extensions/api/#example_3)
 class DelInlineProcessor(InlineProcessor):
     def handleMatch(self, m, data):
@@ -30,33 +63,5 @@ class DelExtension(Extension):
         md.inlinePatterns.register(DelInlineProcessor(DEL_PATTERN, md), "del", 175)
 
 
-@app.route("/createEmail", methods=["POST"])
-def create_email():
-    json = request.get_json()
-    week_no = json["weekNo"]
-    introduction = json["introduction"]
-    events = json["events"]
-    for event in events:
-        event["description"] = markdown(
-            escape(event["description"]), extensions=[DelExtension()]
-        )
-    conclusion = json["conclusion"]
-    name = json["name"]
-    whatsapp = json["whatsapp"]
-    instagram = json["instagram"]
-    email = json["email"]
-    facebook = json["facebook"]
-    website = json["website"]
-    return render_template(
-        "newsletter.html",
-        week_no=week_no,
-        introduction=introduction,
-        events=events,
-        conclusion=conclusion,
-        name=name,
-        whatsapp=whatsapp,
-        instagram=instagram,
-        email=email,
-        facebook=facebook,
-        website=website,
-    )
+def sanitize(input):
+    return markdown(escape(input), extensions=[DelExtension()])
