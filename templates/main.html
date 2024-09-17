@@ -24,22 +24,29 @@
     </div>
     <div class="emails">
         <div class="email" id="markdown">
-            <input type="text" id="weekNumber" name="weekNumber" placeholder="Week Number">
+            <label for="weekNumber" class="label">Week Number</label>
+            <input type="text" id="weekNumber" name="weekNumber" placeholder="Week Number"></br>
+            <label for="introduction" class="label">Introduction</label>
             <textarea class="introduction" id="introduction" name="introduction" placeholder="Introduction"></textarea>
             {% for i in range(1, num_events+1) %}
                 <div class="event" id="event{{i}}">
+                    <label for="event{{i}}Name" class="label">Event {{i}} Name</label>
                     <input type="text" class="event-name" id="event{{i}}Name" name="event{{i}}Name" placeholder="Event {{i}} Name">
                     {% if i != 1 %}
                         <button class="event-close" id="event{{i}}Close" onclick="closeCustomEvent({{i}});">x</button>
                     {% endif %}
+                    <label for="event{{i}}Description" class="label">Event {{i}} Description</label>
                     <textarea class="event-description" id="event{{i}}Description" placeholder="Event {{i}} Description"></textarea>
+                    <label for="event{{i}}tldr" class="label">Event {{i}} tldr</label>
                     <input type="text" class="event-tldr" id="event{{i}}tldr" name="event{{i}}tldr" placeholder="Event {{i}} tldr">
                 </div>
             {% endfor %}
             <div class="add-event-container">
                 <button class="button" id="addEvent" onclick="createCustomEvent()">+</button>
             </div>
+            <label for="conclusion" class="label">Conclusion</label>
             <textarea class="conclusion" id="conclusion" name="conclusion" placeholder="Conclusion"></textarea>
+            <label for="name" class="label">Name</label>
             <input type="text" id="name" name="name" placeholder="Name">
             <div class="links">
                 <div class="link">

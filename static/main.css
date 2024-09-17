@@ -72,7 +72,6 @@ body {
 .email>* {
     margin-bottom: 1vh;
     resize: none;
-    width: 100%;
     border: 1px solid var(--accent);
     border-radius: 5px;
 }
@@ -82,6 +81,13 @@ body {
     border-radius: 0;
 }
 
+.label {
+    font-size: medium;
+    display: inline;
+    border: none !important;
+    margin-right: 0 !important;
+}
+
 .introduction {
     width: calc(100% - 2px);
     min-height: 5vh;
@@ -89,7 +95,7 @@ body {
 
 .event {
     width: 100%;
-    height: 20vh;
+    height: 22vh;
 }
 
 .event>* {
@@ -101,9 +107,8 @@ body {
 
 .event-name {
     height: 10%;
-    width: 92%;
-    margin-top: 2%;
-    margin-right: 0;
+    width: 80%;
+    margin: 1% 0;
 }
 
 .event-close {
@@ -124,6 +129,7 @@ body {
     width: 95%;
     height: 40%;
     resize: none;
+    margin-bottom: 1%;
 }
 
 .event-tldr {
@@ -139,10 +145,12 @@ body {
 }
 
 .conclusion {
+    width: calc(100% - 2px);
     height: 5vh;
 }
 
 .links {
+    width: calc(100% - 2px);
     display: flex;
     flex-direction: column;
     justify-content: center;

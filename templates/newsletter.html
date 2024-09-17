@@ -830,7 +830,7 @@
                                                                         <tbody>
                                                                             <tr>
                                                                                 <td class="mcnTextContent" style="padding-top:0; padding-right:18px; padding-bottom:9px; padding-left:18px;" valign="top">
-                                                                                    <h1>DofE Newsletter Week {{week_no}}</h1>
+                                                                                    <h1>DofE Newsletter Week {{week_no | safe }}</h1>
                                                                                     <br />
                                                                                     {{ introduction | safe }}
                                                                                 </td>
@@ -883,7 +883,7 @@
                                                                         <tbody>
                                                                             <tr>
                                                                                 <td class="mcnTextContent" style="padding-top:0; padding-right:18px; padding-bottom:9px; padding-left:18px;" valign="top">
-                                                                                    <h3>{{ event.title }}</h3>
+                                                                                    <h3>{{ event.title | safe }}</h3>
 
                                                                                     <hr />
                                                                                     <div id="Content">

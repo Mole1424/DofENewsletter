@@ -19,21 +19,21 @@ def index():
 @app.route("/createEmail", methods=["POST"])
 def create_email():
     json = request.get_json()
-    week_no = sanitize(json["weekNo"])
+    week_no = escape(json["weekNo"])
     introduction = sanitize(json["introduction"])
     events = json["events"]
     # apply markdown to the escaped description
     for event in events:
-        event["title"] = sanitize(event["title"])
+        event["title"] = escape(event["title"])
         event["description"] = sanitize(event["description"])
-        event["tldr"] = sanitize(event["tldr"])
+        event["tldr"] = sanitize(event["tldr"])[3:-4]  # remove <p> and </p> tags
     conclusion = sanitize(json["conclusion"])
-    name = sanitize(json["name"])
-    whatsapp = sanitize(json["whatsapp"])
-    instagram = sanitize(json["instagram"])
-    email = sanitize(json["email"])
-    facebook = sanitize(json["facebook"])
-    website = sanitize(json["website"])
+    name = escape(json["name"])
+    whatsapp = escape(json["whatsapp"])
+    instagram = escape(json["instagram"])
+    email = escape(json["email"])
+    facebook = escape(json["facebook"])
+    website = escape(json["website"])
     return render_template(
         "newsletter.html",
         week_no=week_no,
