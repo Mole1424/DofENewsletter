@@ -64,9 +64,12 @@ function createCustomEvent() {
     setCookie('numEvents', numEvents);
     const eventHtml = `
         <div class="event" id="event${numEvents}">
+            <label for="event${numEvents}Name" class="label">Event ${numEvents} Name</label>
             <input type="text" class="event-name" id="event${numEvents}Name" name="event${numEvents}Name" placeholder="Event ${numEvents} Name">
             <button class="event-close" id="event${numEvents}Close" onclick="closeCustomEvent(${numEvents});">x</button>
+            <label for="event${numEvents}Description" class="label">Event ${numEvents} Description</label>
             <textarea class="event-description" id="event${numEvents}Description" placeholder="Event ${numEvents} Description"></textarea>
+            <label for="event${numEvents}tldr" class="label">Event ${numEvents} tldr</label>
             <input type="text" class="event-tldr" id="event${numEvents}tldr" name="event${numEvents}tldr" placeholder="Event ${numEvents} tldr">
         </div>
     `;
